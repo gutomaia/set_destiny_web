@@ -1,0 +1,11 @@
+gunicorn
+ipdb
+pytest
+pytest-cov
+pytest-notifier
+pytest-watch
+Sphinx
+sphinx_rtd_theme
+sphinxcontrib-httpdomain
+sphinxcontrib-napoleon
+sphinxcontrib-plantuml

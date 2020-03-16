@@ -1,0 +1,10 @@
+*.egg-info/
+*.pyc
+.checkpoint/
+.coverage
+.pytest_cache/
+__pycache__
+cov.xml
+cov_annotate/
+cov_html/
+venv/
