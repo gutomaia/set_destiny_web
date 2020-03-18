@@ -6,7 +6,7 @@ from set_destiny_web.risk.grade import grade
 class GradeRuleTest(GradeRulesSpec, TestCase):
 
     def when_grade_rule_with(self, **kwargs):
-        self.grade = grade(**kwargs)
+        self.grade = grade(kwargs)
 
     def assert_grade(self, **kwargs):
         for k, v in kwargs.items():

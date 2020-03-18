@@ -2,6 +2,8 @@ from flask_restplus import Namespace, Resource, fields
 from set_destiny_web.risk.score import score
 from set_destiny_web.risk.ineligible import ineligible
 from set_destiny_web.risk.grade import grade
+from set_destiny_web.background.tasks import calculate_risk
+
 
 import enum
 
@@ -86,6 +88,18 @@ class ProfileList(Resource):
     def post(self):
         scores = score(**ns.payload)
         elegiblity = ineligible(scores, **ns.payload)
-        data = grade(**elegiblity)
+        data = grade(elegiblity)
 
         return data, 201
+
+
+@ns.route('/async')
+class ProfileAsync(Resource):
+
+    @ns.doc(description='create profile async')
+    @ns.expect(profile)
+    @ns.marshal_with(insurance, code=202)
+    def post(self):
+        calculate_risk.s(**ns.payload).apply_async()
+
+        return dict(status='Accepted'), 202

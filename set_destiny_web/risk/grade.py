@@ -1,8 +1,10 @@
+from celery import shared_task
 
 
-def grade(**kwargs):
+@shared_task
+def grade(score):
     data = {}
-    for k, v in kwargs.items():
+    for k, v in score.items():
         if isinstance(v, str):
             data[k] = v
         elif v <= 0:

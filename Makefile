@@ -30,6 +30,10 @@ build: python_build ${CHECKPOINT_DIR}/.python_develop
 run: build
 	${VIRTUALENV} FLASK_ENV=development FLASK_APP=set_destiny_web.main flask run
 
+worker: build
+	${VIRTUALENV} celery -A set_destiny_web.background.main worker -l INFO --no-execv
+
+
 test: build ${REQUIREMENTS_TEST}
 	${VIRTUALENV} py.test ${PYTHON_MODULES} --ignore ${PYTHON_MODULES}/tests/integration
 
